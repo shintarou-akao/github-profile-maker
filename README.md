@@ -1,16 +1,16 @@
 # GitHub Profile Maker
 
-GitHub プロフィールを簡単に作成できるツールです。自分の GitHub ユーザー名を入力するだけで、素敵なプロフィールマークダウンを生成できます。
+A tool to easily create beautiful GitHub profiles. Simply enter your GitHub username to generate a stunning profile markdown.
 
-## 機能
+## Features
 
-- GitHub ユーザー名から自動的にプロフィール情報を取得
-- 複数のテンプレートから選択可能
-- リアルタイムプレビュー
-- 生成したマークダウンのコピーとダウンロード
-- 多言語対応
+- Automatic profile information retrieval from GitHub username
+- Multiple template options
+- Real-time preview
+- Copy and download generated markdown
+- Multi-language support
 
-## 技術スタック
+## Tech Stack
 
 - React
 - TypeScript
@@ -19,38 +19,45 @@ GitHub プロフィールを簡単に作成できるツールです。自分の 
 - React Router
 - React Markdown
 
-## 使い方
+## Development Tools
 
-1. GitHub ユーザー名を入力
-2. テンプレートを選択
-3. 生成されたプロフィールをプレビュー
-4. マークダウンをコピーまたはダウンロード
-5. 自分の GitHub プロフィールに貼り付け
+This project was developed using:
 
-## インストール
+- [Bolt](https://bolt.new) - For rapid development and deployment
+- [Cursor Agent](https://cursor.sh) - For AI-powered development assistance
+
+## Usage
+
+1. Enter your GitHub username
+2. Select a template
+3. Preview your generated profile
+4. Copy or download the markdown
+5. Paste it to your GitHub profile
+
+## Installation
 
 ```bash
-# リポジトリをクローン
+# Clone the repository
 git clone https://github.com/yourusername/github-profile-maker.git
 cd github-profile-maker
 
-# 依存関係をインストール
+# Install dependencies
 npm install
 
-# 開発サーバーを起動
+# Start development server
 npm run dev
 ```
 
-## ビルド
+## Build
 
 ```bash
 npm run build
 ```
 
-## 貢献
+## Contributing
 
-プルリクエスト大歓迎です。大きな変更を加える場合は、まず issue を開いて議論してください。
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## ライセンス
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
