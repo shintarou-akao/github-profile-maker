@@ -11,7 +11,7 @@ import { TemplateSelector } from "./components/TemplateSelector";
 import { ProfilePreview } from "./components/ProfilePreview";
 import { GitHubUser, Template, GitHubApiUser, GitHubRepo } from "./types";
 import { Github, Languages } from "lucide-react";
-import { Language, translations, Translations } from "./translations";
+import { translations, Language, Translations } from "./translations";
 
 // 言語コンテキストを作成
 interface LanguageContextType {
@@ -212,6 +212,34 @@ function TemplateSelectionPage() {
   );
 }
 
+// トースト通知のコンポーネント
+function Toast({
+  message,
+  isVisible,
+  onClose,
+}: {
+  message: string;
+  isVisible: boolean;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, onClose]);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-md shadow-lg z-50 animate-fade-in-up">
+      {message}
+    </div>
+  );
+}
+
 // プロフィールプレビュー画面コンポーネント
 function ProfilePreviewPage() {
   const { username, templateId } = useParams<{
@@ -223,6 +251,7 @@ function ProfilePreviewPage() {
   const [generatedMarkdown, setGeneratedMarkdown] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showToast, setShowToast] = useState(false);
   const { t } = useLanguage();
 
   const templates: Template[] = [
@@ -391,6 +420,7 @@ function ProfilePreviewPage() {
 
   const handleCopyMarkdown = () => {
     navigator.clipboard.writeText(generatedMarkdown);
+    setShowToast(true);
   };
 
   const handleDownloadMarkdown = () => {
@@ -431,6 +461,11 @@ function ProfilePreviewPage() {
           profileTitle: t.profileTitle,
           templateLabel: t.templateLabel,
         }}
+      />
+      <Toast
+        message={t.copiedToClipboard || "クリップボードにコピーしました"}
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
       />
     </div>
   );

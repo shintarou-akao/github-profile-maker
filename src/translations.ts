@@ -20,6 +20,7 @@ export interface Translations {
   noBioAvailable: string;
   notSpecified: string;
   genericError: string;
+  copiedToClipboard: string;
 
   // テンプレート関連の翻訳
   templates: {
@@ -62,6 +63,7 @@ export const translations: Record<Language, Translations> = {
     noBioAvailable: "No bio available",
     notSpecified: "Not specified",
     genericError: "An error occurred",
+    copiedToClipboard: "Copied to clipboard!",
 
     templates: {
       minimalist: {
@@ -223,6 +225,7 @@ const profile = {
     noBioAvailable: "自己紹介文がありません",
     notSpecified: "未設定",
     genericError: "エラーが発生しました",
+    copiedToClipboard: "クリップボードにコピーしました！",
 
     templates: {
       minimalist: {
