@@ -21,6 +21,8 @@ export interface Translations {
   notSpecified: string;
   genericError: string;
   copiedToClipboard: string;
+  templateNotFound: string;
+  rateLimitExceeded: string;
 
   // テンプレート関連の翻訳
   templates: {
@@ -64,6 +66,9 @@ export const translations: Record<Language, Translations> = {
     notSpecified: "Not specified",
     genericError: "An error occurred",
     copiedToClipboard: "Copied to clipboard!",
+    templateNotFound: "Template not found",
+    rateLimitExceeded:
+      "GitHub API rate limit exceeded. Please try again later.",
 
     templates: {
       minimalist: {
@@ -226,6 +231,9 @@ const profile = {
     notSpecified: "未設定",
     genericError: "エラーが発生しました",
     copiedToClipboard: "クリップボードにコピーしました！",
+    templateNotFound: "テンプレートが見つかりません",
+    rateLimitExceeded:
+      "GitHub APIのリクエスト上限に達しました。しばらく時間をおいて再度お試しください。",
 
     templates: {
       minimalist: {
