@@ -31,10 +31,4 @@ export interface GitHubRepo {
   language: string | null;
 }
 
-export type TemplateType =
-  | "modern"
-  | "minimalist"
-  | "detailed"
-  | "stats-dashboard"
-  | "tech"
-  | "creative";
+export type TemplateType = "modern" | "minimalist" | "detailed" | "creative";

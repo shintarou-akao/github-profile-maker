@@ -106,18 +106,6 @@ function TemplateSelectionPage() {
       preview: t.templates.detailed.preview,
     },
     {
-      id: "stats-dashboard",
-      name: t.templates.statsDashboard.name,
-      description: t.templates.statsDashboard.description,
-      preview: t.templates.statsDashboard.preview,
-    },
-    {
-      id: "tech",
-      name: t.templates.tech.name,
-      description: t.templates.tech.description,
-      preview: t.templates.tech.preview,
-    },
-    {
       id: "creative",
       name: t.templates.creative.name,
       description: t.templates.creative.description,
@@ -261,18 +249,6 @@ function ProfilePreviewPage() {
       name: t.templates.detailed.name,
       description: t.templates.detailed.description,
       preview: t.templates.detailed.preview,
-    },
-    {
-      id: "stats-dashboard",
-      name: t.templates.statsDashboard.name,
-      description: t.templates.statsDashboard.description,
-      preview: t.templates.statsDashboard.preview,
-    },
-    {
-      id: "tech",
-      name: t.templates.tech.name,
-      description: t.templates.tech.description,
-      preview: t.templates.tech.preview,
     },
     {
       id: "creative",
