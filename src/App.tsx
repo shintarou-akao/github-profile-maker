@@ -88,12 +88,6 @@ function TemplateSelectionPage() {
 
   const templates: Template[] = [
     {
-      id: "modern",
-      name: t.templates.modern.name,
-      description: t.templates.modern.description,
-      preview: t.templates.modern.preview,
-    },
-    {
       id: "minimalist",
       name: t.templates.minimalist.name,
       description: t.templates.minimalist.description,
@@ -232,12 +226,6 @@ function ProfilePreviewPage() {
   const { t } = useLanguage();
 
   const templates: Template[] = [
-    {
-      id: "modern",
-      name: t.templates.modern.name,
-      description: t.templates.modern.description,
-      preview: t.templates.modern.preview,
-    },
     {
       id: "minimalist",
       name: t.templates.minimalist.name,

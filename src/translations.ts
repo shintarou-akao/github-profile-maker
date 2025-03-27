@@ -23,11 +23,6 @@ export interface Translations {
 
   // テンプレート関連の翻訳
   templates: {
-    modern: {
-      name: string;
-      description: string;
-      preview: string;
-    };
     minimalist: {
       name: string;
       description: string;
@@ -49,7 +44,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   en: {
     appTitle: "GitHub Profile Maker",
-    appDescription: "Create your GitHub profile in seconds",
+    appDescription: "Create a GitHub profile in seconds",
     chooseTemplate: "Choose a Template",
     backToTemplates: "Back to Templates",
     backToUserInput: "Back to User Input",
@@ -69,89 +64,52 @@ export const translations: Record<Language, Translations> = {
     genericError: "An error occurred",
 
     templates: {
-      modern: {
-        name: "Modern",
-        description: "A modern, professional profile with comprehensive stats",
-        preview: `<h1 align="center">👋 Hi, I'm [name]</h1>
-
-<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&color=success&style=flat" alt="Public Repositories" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
-</p>
-
-<h3 align="center">[bio]</h3>
-
-### 🔭 About Me
-
-{{company}}
-{{location}}
-
-### 💻 Tech Stack
-
-\`\`\`
-[languages]
-\`\`\`
-
-### 📈 GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=[username]&show_icons=true&theme=radical" alt="GitHub Stats" />
-</p>
-
-### 🤝 Connect with Me
-
-- GitHub: https://github.com/[username]
-- Location: [location]`,
-      },
       minimalist: {
-        name: "Simple",
-        description: "Clean and focused presentation of your work",
+        name: "Minimalist",
+        description: "A clean, focused showcase of your work",
         preview: `# [name]
 
-<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&style=flat" alt="Repositories" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Views&color=0e75b6&style=flat" alt="Profile Views" />
-</p>
+## About Me
 
-> [bio]
+[bio]
 
-## Quick Overview
+{{company_typescript}}
+{{location_typescript}}
+
+## Skills & Technologies
 
 \`\`\`typescript
 const profile = {
-  {{location_typescript}}
-  {{company_typescript}}
-  expertise: [
+  languages: [
     [languages]
-  ]
+  ],
+  frameworks: ["React", "Vue", "Angular", "Express"],
+  databases: ["MongoDB", "PostgreSQL", "MySQL"],
+  tools: ["Git", "Docker", "VS Code", "Figma"]
 };
 \`\`\`
 
-## Activity
+## Featured Projects
 
-- 💻 Most used languages: [languages]
+- **Project 1**: Short description of a cool project you worked on
+- **Project 2**: Another interesting project worth mentioning
+- **Project 3**: Something else you're proud of
 
----
+## Connect With Me
 
-<details>
-<summary>📊 GitHub Statistics</summary>
-
-![Stats](https://github-readme-stats.vercel.app/api?username=[username]&show_icons=true&theme=dark)
-![Languages](https://github-readme-streak-stats.herokuapp.com/?user=[username]&theme=dark)
-
-</details>`,
+- 📫 Email: your.email@example.com
+- 🔗 LinkedIn: linkedin.com/in/[username]
+- 🐦 Twitter: @[username]
+- 💻 Personal Website: [username].dev
+`,
       },
       detailed: {
         name: "Detailed",
-        description: "Full showcase of your GitHub presence",
-        preview: `<div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+[name]'s+Profile!;Check+out+my+repositories;Connect+with+me+on+GitHub&font=Fira%20Code&center=true&width=380&height=50">
+        description: "A complete showcase of your GitHub presence",
+        preview: `<div>
+  <img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+[name]'s+profile!;Check+out+my+repositories;Let's+connect+on+GitHub!&font=Fira%20Code&center=true&width=380&height=50">
   
-  <p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
+  <p style="display: flex; flex-wrap: wrap; gap: 4px;">
     <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repositories&query=$.public_repos&style=for-the-badge" alt="Repositories" />
     <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=for-the-badge" alt="Followers" />
     <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=for-the-badge" alt="Following" />
@@ -163,31 +121,31 @@ const profile = {
 
 [bio]
 
-### 🌟 Quick Facts
+### 🌟 Basic Info
 
 {{company_detailed}}
 {{location_detailed}}
 
-### 💻 Technology Expertise
+### 💻 Tech Specs
 
 \`\`\`json
 {
-  "primary_languages": [
+  "Languages": [
     [languages]
   ]
 }
 \`\`\`
 
-### 📊 GitHub Analytics
+### 📊 GitHub Analysis
 
-<p align="center">
+<p>
   <img height="180em" src="https://github-readme-stats.vercel.app/api?username=[username]&show_icons=true&theme=tokyonight" />
   <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=[username]&layout=compact&theme=tokyonight" />
 </p>
 
 ### 🏆 GitHub Trophies
 
-<p align="center">
+<p>
   <img src="https://github-profile-trophy.vercel.app/?username=[username]&theme=nord&column=7" />
 </p>
 
@@ -200,23 +158,23 @@ const profile = {
       creative: {
         name: "Creative",
         description:
-          "A creative and visually striking profile with animated elements",
-        preview: `<div align="center">
+          "A creative, visually striking profile with animated elements",
+        preview: `<div>
   
-  ![Waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=[name]&fontAlign=70&fontAlignY=40&color=gradient)
+  ![Header](https://capsule-render.vercel.app/api?type=waving&height=200&text=[name]&fontAlign=70&fontAlignY=40&color=gradient)
   
-  <h1>Welcome to my GitHub Profile! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
-  
-  [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=6A737D&center=true&vCenter=true&width=435&lines=[bio])](https://git.io/typing-svg)
+  <h1 style="display: flex; align-items: center; gap: 10px;">Welcome to my GitHub Profile! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
   
   <img src="https://github-contribution-stats.vercel.app/api/?username=[username]" alt="Contribution Stats" />
 </div>
 
-<div align="center">
+<div>
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=[username]&theme=dracula" />
 </div>
 
 ## 🌱 About Me
+
+[bio]
 
 {{company}}
 {{location}}
@@ -225,26 +183,20 @@ const profile = {
 
 ## 🔥 My Skills
 
-<p align="center">
+<p>
   <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="70px" height="70px">
 </p>
 
-<p align="center">
+<p>
   <img src="https://skillicons.dev/icons?i=js,ts,react,vue,nodejs,python,java,go,docker,kubernetes&perline=5" alt="Skills">
 </p>
 
 ---
 
-## 📊 GitHub Statistics
+## 📊 GitHub Stats
 
-<p align="center">
+<p>
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=[username]&theme=radical" alt="GitHub Streak" />
-</p>
-
----
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=blueviolet&style=for-the-badge" alt="Profile Views" />
 </p>
 
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=120&section=footer"/>`,
@@ -273,90 +225,52 @@ const profile = {
     genericError: "エラーが発生しました",
 
     templates: {
-      modern: {
-        name: "モダン",
-        description:
-          "包括的な統計情報を含む、モダンでプロフェッショナルなプロフィール",
-        preview: `<h1 align="center">👋 こんにちは、[name]です</h1>
-
-<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&color=success&style=flat" alt="Repositories" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
-</p>
-
-<h3 align="center">[bio]</h3>
-
-### 🔭 自己紹介
-
-{{company_ja}}
-{{location_ja}}
-
-### 💻 技術スタック
-
-\`\`\`
-[languages]
-\`\`\`
-
-### 📈 GitHub統計
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=[username]&show_icons=true&theme=radical&locale=ja" alt="GitHub統計" />
-</p>
-
-### 🤝 コンタクト
-
-- GitHub: https://github.com/[username]
-- 所在地: [location]`,
-      },
       minimalist: {
         name: "シンプル",
         description: "クリーンで焦点を絞った作業の紹介",
         preview: `# [name]
 
-<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&style=flat" alt="Repositories" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
-  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Views&color=0e75b6&style=flat" alt="Profile Views" />
-</p>
+## 自己紹介
 
-> [bio]
+[bio]
 
-## 簡単な概要
+{{company_typescript_ja}}
+{{location_typescript_ja}}
+
+## スキルと技術
 
 \`\`\`typescript
 const profile = {
-  {{location_typescript_ja}}
-  {{company_typescript_ja}}
-  得意技術: [
+  言語: [
     [languages]
-  ]
+  ],
+  フレームワーク: ["React", "Vue", "Angular", "Express"],
+  データベース: ["MongoDB", "PostgreSQL", "MySQL"],
+  ツール: ["Git", "Docker", "VS Code", "Figma"]
 };
 \`\`\`
 
-## 活動
+## 注目のプロジェクト
 
-- 💻 よく使用する言語: [languages]
+- **プロジェクト1**: 手がけたクールなプロジェクトの簡単な説明
+- **プロジェクト2**: 他にも言及する価値のある興味深いプロジェクト
+- **プロジェクト3**: あなたが誇りに思うその他のもの
 
----
+## 連絡先
 
-<details>
-<summary>📊 GitHub統計</summary>
-
-![統計](https://github-readme-stats.vercel.app/api?username=[username]&show_icons=true&theme=dark&locale=ja)
-![言語](https://github-readme-streak-stats.herokuapp.com/?user=[username]&theme=dark&locale=ja)
-
-</details>`,
+- 📫 メール: your.email@example.com
+- 🔗 LinkedIn: linkedin.com/in/[username]
+- 🐦 Twitter: @[username]
+- 💻 個人サイト: [username].dev
+`,
       },
       detailed: {
         name: "詳細",
         description: "GitHubプレゼンスの完全なショーケース",
-        preview: `<div align="center">
+        preview: `<div>
   <img src="https://readme-typing-svg.herokuapp.com/?lines=[name]のプロフィールへようこそ!;リポジトリをチェックしてください;GitHubでつながりましょう&font=Fira%20Code&center=true&width=380&height=50">
   
-  <p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
+  <p style="display: flex; flex-wrap: wrap; gap: 4px;">
     <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repositories&query=$.public_repos&style=for-the-badge" alt="Repositories" />
     <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=for-the-badge" alt="Followers" />
     <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=for-the-badge" alt="Following" />
@@ -385,14 +299,14 @@ const profile = {
 
 ### 📊 GitHub分析
 
-<p align="center">
+<p>
   <img height="180em" src="https://github-readme-stats.vercel.app/api?username=[username]&show_icons=true&theme=tokyonight&locale=ja" />
   <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=[username]&layout=compact&theme=tokyonight&locale=ja" />
 </p>
 
 ### 🏆 GitHubトロフィー
 
-<p align="center">
+<p>
   <img src="https://github-profile-trophy.vercel.app/?username=[username]&theme=nord&column=7&locale=ja" />
 </p>
 
@@ -406,22 +320,22 @@ const profile = {
         name: "クリエイティブ",
         description:
           "アニメーション要素を含む創造的で視覚的に印象的なプロフィール",
-        preview: `<div align="center">
+        preview: `<div>
   
   ![波](https://capsule-render.vercel.app/api?type=waving&height=200&text=[name]&fontAlign=70&fontAlignY=40&color=gradient)
   
-  <h1>私のGitHubプロフィールへようこそ！ <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
-  
-  [![タイピングSVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=6A737D&center=true&vCenter=true&width=435&lines=[bio])](https://git.io/typing-svg)
+  <h1 style="display: flex; align-items: center; gap: 10px;">私のGitHubプロフィールへようこそ！ <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
   
   <img src="https://github-contribution-stats.vercel.app/api/?username=[username]" alt="貢献統計" />
 </div>
 
-<div align="center">
+<div>
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=[username]&theme=dracula" />
 </div>
 
 ## 🌱 自己紹介
+
+[bio]
 
 {{company_ja}}
 {{location_ja}}
@@ -430,11 +344,11 @@ const profile = {
 
 ## 🔥 私のスキル
 
-<p align="center">
+<p>
   <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="70px" height="70px">
 </p>
 
-<p align="center">
+<p>
   <img src="https://skillicons.dev/icons?i=js,ts,react,vue,nodejs,python,java,go,docker,kubernetes&perline=5" alt="スキル">
 </p>
 
@@ -442,14 +356,8 @@ const profile = {
 
 ## 📊 GitHub統計
 
-<p align="center">
+<p>
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=[username]&theme=radical&locale=ja" alt="GitHub連続貢献" />
-</p>
-
----
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=プロフィール表示&color=blueviolet&style=for-the-badge" alt="プロフィール表示数" />
 </p>
 
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=120&section=footer"/>`,

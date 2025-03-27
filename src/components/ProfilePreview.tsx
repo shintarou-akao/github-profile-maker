@@ -107,10 +107,15 @@ export function ProfilePreview({
               <code className="text-sm">{markdown}</code>
             </pre>
           ) : (
-            <div className="prose max-w-none">
+            <div className="prose max-w-none overflow-hidden">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
+                components={{
+                  img: ({ ...props }) => (
+                    <img {...props} className="max-w-full" />
+                  ),
+                }}
               >
                 {markdown}
               </ReactMarkdown>
