@@ -1,40 +1,44 @@
-# GitHub Profile Maker
+# 🎨 GitHub Profile Maker
 
 A tool to easily create beautiful GitHub profiles. Simply enter your GitHub username to generate a stunning profile markdown.
 
-## Features
+## 🎥 Demo
 
-- Automatic profile information retrieval from GitHub username
-- Multiple template options
-- Real-time preview
-- Copy and download generated markdown
-- Multi-language support
+![Demo](demo.gif)
 
-## Tech Stack
+## ✨ Features
 
-- React
-- TypeScript
-- Tailwind CSS
-- Vite
-- React Router
-- React Markdown
+- 🔄 Automatic profile information retrieval from GitHub username
+- 🎯 Multiple template options
+- 👀 Real-time preview
+- 📋 Copy and download generated markdown
+- 🌐 Multi-language support
 
-## Development Tools
+## 🛠️ Tech Stack
+
+- ⚛️ React
+- 📘 TypeScript
+- 🎨 Tailwind CSS
+- ⚡ Vite
+- 🛣️ React Router
+- 📝 React Markdown
+
+## 🛠️ Development Tools
 
 This project was developed using:
 
-- [Bolt](https://bolt.new) - For rapid development and deployment
-- [Cursor Agent](https://cursor.sh) - For AI-powered development assistance
+- ⚡ [Bolt](https://bolt.new) - For rapid development and deployment
+- 🤖 [Cursor Agent](https://cursor.sh) - For AI-powered development assistance
 
-## Usage
+## 📖 Usage
 
-1. Enter your GitHub username
-2. Select a template
-3. Preview your generated profile
-4. Copy or download the markdown
-5. Paste it to your GitHub profile
+1. 🔑 Enter your GitHub username
+2. 🎯 Select a template
+3. 👀 Preview your generated profile
+4. 📋 Copy or download the markdown
+5. 📝 Paste it to your GitHub profile
 
-## Installation
+## 🚀 Installation
 
 ```bash
 # Clone the repository
@@ -48,16 +52,16 @@ npm install
 npm run dev
 ```
 
-## Build
+## 📦 Build
 
 ```bash
 npm run build
 ```
 
-## Contributing
+## 🤝 Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+## 📄 License
 
 [MIT](https://choosealicense.com/licenses/mit/)
