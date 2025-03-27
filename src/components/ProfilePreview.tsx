@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Download, Copy, ArrowLeft, Code, Eye } from "lucide-react";
 import { GitHubUser } from "../types";
 import ReactMarkdown from "react-markdown";
