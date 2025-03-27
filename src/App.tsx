@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import {
   Routes,
   Route,
@@ -11,15 +11,34 @@ import { TemplateSelector } from "./components/TemplateSelector";
 import { ProfilePreview } from "./components/ProfilePreview";
 import { GitHubUser, Template, GitHubApiUser, GitHubRepo } from "./types";
 import { Github, Languages } from "lucide-react";
-import { Language, translations } from "./translations";
+import { Language, translations, Translations } from "./translations";
+
+// 言語コンテキストを作成
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: Translations;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
+
+// 言語コンテキストを使用するためのフック
+function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+}
 
 // ホームページコンポーネント - ユーザー名入力画面
 function HomePage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [language] = useState<Language>("en");
-  const t = translations[language];
+  const { t } = useLanguage();
 
   const handleUsernameSubmit = async (username: string) => {
     setIsLoading(true);
@@ -36,7 +55,7 @@ function HomePage() {
       navigate(`/user/${username}`);
     } catch (error) {
       console.error("Error fetching user data:", error);
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : t.genericError);
     } finally {
       setIsLoading(false);
     }
@@ -65,8 +84,7 @@ function TemplateSelectionPage() {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [language] = useState<Language>("en");
-  const t = translations[language];
+  const { t } = useLanguage();
 
   const templates: Template[] = [
     {
@@ -111,9 +129,9 @@ function TemplateSelectionPage() {
 
         const user: GitHubUser = {
           name: userData.name || username,
-          bio: userData.bio || "No bio available",
-          company: userData.company || "Not specified",
-          location: userData.location || "Not specified",
+          bio: userData.bio || t.noBioAvailable,
+          company: userData.company || t.notSpecified,
+          location: userData.location || t.notSpecified,
           public_repos: userData.public_repos,
           followers: userData.followers,
           following: userData.following,
@@ -124,7 +142,7 @@ function TemplateSelectionPage() {
         setUser(user);
       } catch (error) {
         console.error("Error fetching user data:", error);
-        setError(error instanceof Error ? error.message : "An error occurred");
+        setError(error instanceof Error ? error.message : t.genericError);
         navigate("/"); // エラーが発生した場合はホームに戻る
       } finally {
         setIsLoading(false);
@@ -205,8 +223,7 @@ function ProfilePreviewPage() {
   const [generatedMarkdown, setGeneratedMarkdown] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [language] = useState<Language>("en");
-  const t = translations[language];
+  const { t } = useLanguage();
 
   const templates: Template[] = [
     {
@@ -251,9 +268,9 @@ function ProfilePreviewPage() {
 
         const user: GitHubUser = {
           name: userData.name || username,
-          bio: userData.bio || "No bio available",
-          company: userData.company || "Not specified",
-          location: userData.location || "Not specified",
+          bio: userData.bio || t.noBioAvailable,
+          company: userData.company || t.notSpecified,
+          location: userData.location || t.notSpecified,
           public_repos: userData.public_repos,
           followers: userData.followers,
           following: userData.following,
@@ -266,7 +283,7 @@ function ProfilePreviewPage() {
         // マークダウンの生成
         const template = templates.find((t) => t.id === templateId);
         if (template && user) {
-          const markdown = template.preview
+          let markdown = template.preview
             .replace(/\[name\]/g, user.name)
             .replace(/\[bio\]/g, user.bio)
             .replace(/\[company\]/g, user.company)
@@ -280,13 +297,59 @@ function ProfilePreviewPage() {
             )
             .replace(/\[username\]/g, user.username);
 
+          // 条件付き表示を削除し、常に表示するように修正
+          markdown = markdown
+            .replace(
+              /{{company}}/,
+              `- 🏢 Currently working at **${user.company}**`
+            )
+            .replace(
+              /{{company_ja}}/,
+              `- 🏢 現在 **${user.company}** で働いています`
+            )
+            .replace(/{{company_typescript}}/, `  company: '${user.company}',`)
+            .replace(/{{company_typescript_ja}}/, `  所属: '${user.company}',`)
+            .replace(
+              /{{company_detailed}}/,
+              `- 🏢 Working at **${user.company}**`
+            )
+            .replace(
+              /{{company_detailed_ja}}/,
+              `- 🏢 **${user.company}**で働いています`
+            );
+
+          markdown = markdown
+            .replace(/{{location}}/, `- 📍 Based in **${user.location}**`)
+            .replace(
+              /{{location_ja}}/,
+              `- 📍 **${user.location}** を拠点としています`
+            )
+            .replace(
+              /{{location_typescript}}/,
+              `  location: '${user.location}',`
+            )
+            .replace(
+              /{{location_typescript_ja}}/,
+              `  拠点: '${user.location}',`
+            )
+            .replace(
+              /{{location_detailed}}/,
+              `- 📍 Located in **${user.location}**`
+            )
+            .replace(
+              /{{location_detailed_ja}}/,
+              `- 📍 **${user.location}**に住んでいます`
+            )
+            .replace(/{{location_contact}}/, `- Location: ${user.location}`)
+            .replace(/{{location_contact_ja}}/, `- 所在地: ${user.location}`);
+
           setGeneratedMarkdown(markdown);
         } else {
           throw new Error("Template not found");
         }
       } catch (error) {
         console.error("Error:", error);
-        setError(error instanceof Error ? error.message : "An error occurred");
+        setError(error instanceof Error ? error.message : t.genericError);
         navigate("/"); // エラーが発生した場合はホームに戻る
       } finally {
         setIsLoading(false);
@@ -445,7 +508,12 @@ function LanguageSelector({
 }
 
 function App() {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>(() => {
+    // ブラウザの言語設定を取得
+    const browserLang = navigator.language.split("-")[0];
+    // サポートしている言語かチェック
+    return browserLang === "ja" ? "ja" : "en";
+  });
   const t = translations[language];
 
   useEffect(() => {
@@ -468,33 +536,42 @@ function App() {
     };
   }, []);
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="flex justify-end mb-4">
-          <LanguageSelector language={language} setLanguage={setLanguage} />
-        </div>
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-6">
-            <Github size={48} className="text-gray-800" />
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {t.appTitle}
-          </h1>
-          <p className="text-xl text-gray-600">{t.appDescription}</p>
-        </div>
+  // 言語コンテキストの値
+  const languageContextValue = {
+    language,
+    setLanguage,
+    t,
+  };
 
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/user/:username" element={<TemplateSelectionPage />} />
-          <Route
-            path="/user/:username/template/:templateId"
-            element={<ProfilePreviewPage />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+  return (
+    <LanguageContext.Provider value={languageContextValue}>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="flex justify-end mb-4">
+            <LanguageSelector language={language} setLanguage={setLanguage} />
+          </div>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <Github size={48} className="text-gray-800" />
+            </div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              {t.appTitle}
+            </h1>
+            <p className="text-xl text-gray-600">{t.appDescription}</p>
+          </div>
+
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/user/:username" element={<TemplateSelectionPage />} />
+            <Route
+              path="/user/:username/template/:templateId"
+              element={<ProfilePreviewPage />}
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </LanguageContext.Provider>
   );
 }
 
