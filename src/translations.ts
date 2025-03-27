@@ -17,6 +17,9 @@ export interface Translations {
   enterUsername: string;
   searchUser: string;
   loading: string;
+  noBioAvailable: string;
+  notSpecified: string;
+  genericError: string;
 
   // テンプレート関連の翻訳
   templates: {
@@ -56,25 +59,29 @@ export const translations: Record<Language, Translations> = {
     enterUsername: "Enter your GitHub username",
     searchUser: "Search User",
     loading: "Loading...",
+    noBioAvailable: "No bio available",
+    notSpecified: "Not specified",
+    genericError: "An error occurred",
 
     templates: {
       modern: {
-        name: "Modern Professional",
+        name: "Modern",
         description: "A modern, professional profile with comprehensive stats",
         preview: `<h1 align="center">👋 Hi, I'm [name]</h1>
 
-<p align="center">
+<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
   <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&color=success&style=flat" alt="Public Repositories" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
 </p>
 
 <h3 align="center">[bio]</h3>
 
 ### 🔭 About Me
 
-- 🏢 Currently working at **[company]**
-- 📍 Based in **[location]**
-- 📊 Maintaining **[repos]** public repositories
-- 🌟 Followed by **[followers]** developers
+{{company}}
+{{location}}
 
 ### 💻 Tech Stack
 
@@ -94,9 +101,16 @@ export const translations: Record<Language, Translations> = {
 - Location: [location]`,
       },
       minimalist: {
-        name: "Minimalist Developer",
+        name: "Simple",
         description: "Clean and focused presentation of your work",
         preview: `# [name]
+
+<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&style=flat" alt="Repositories" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
+  <img src="https://komarev.com/ghpvc/?username=[username]&label=Views&color=0e75b6&style=flat" alt="Profile Views" />
+</p>
 
 > [bio]
 
@@ -104,11 +118,8 @@ export const translations: Record<Language, Translations> = {
 
 \`\`\`typescript
 const profile = {
-  location: '[location]',
-  company: '[company]',
-  repositories: [repos],
-  followers: [followers],
-  following: [following],
+  {{location_typescript}}
+  {{company_typescript}}
   expertise: [
     [languages]
   ]
@@ -117,8 +128,6 @@ const profile = {
 
 ## Activity
 
-- 📚 Maintaining [repos] open source projects
-- 👥 Connected with [followers] developers
 - 💻 Most used languages: [languages]
 
 ---
@@ -132,10 +141,17 @@ const profile = {
 </details>`,
       },
       detailed: {
-        name: "Comprehensive Portfolio",
+        name: "Detailed",
         description: "Full showcase of your GitHub presence",
         preview: `<div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+[name]'s+Profile!;[repos]+Public+Repositories;[followers]+GitHub+Followers&font=Fira%20Code&center=true&width=380&height=50">
+  <img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+[name]'s+Profile!;Check+out+my+repositories;Connect+with+me+on+GitHub&font=Fira%20Code&center=true&width=380&height=50">
+  
+  <p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
+    <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repositories&query=$.public_repos&style=for-the-badge" alt="Repositories" />
+    <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=for-the-badge" alt="Followers" />
+    <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=for-the-badge" alt="Following" />
+    <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile views" />
+  </p>
 </div>
 
 ## 👨‍💻 About Me
@@ -144,11 +160,8 @@ const profile = {
 
 ### 🌟 Quick Facts
 
-- 🏢 Working at **[company]**
-- 📍 Located in **[location]**
-- 📈 **[repos]** public repositories
-- 🤝 **[followers]** followers
-- 👥 Following **[following]** developers
+{{company_detailed}}
+{{location_detailed}}
 
 ### 💻 Technology Expertise
 
@@ -156,12 +169,7 @@ const profile = {
 {
   "primary_languages": [
     [languages]
-  ],
-  "stats": {
-    "repositories": [repos],
-    "followers": [followers],
-    "following": [following]
-  }
+  ]
 }
 \`\`\`
 
@@ -182,11 +190,7 @@ const profile = {
 
 ![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=[username]&theme=react-dark)
 
----
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" />
-</p>`,
+---`,
       },
     },
   },
@@ -207,26 +211,30 @@ const profile = {
     enterUsername: "GitHubのユーザー名を入力してください",
     searchUser: "ユーザーを検索",
     loading: "読み込み中...",
+    noBioAvailable: "自己紹介文がありません",
+    notSpecified: "未設定",
+    genericError: "エラーが発生しました",
 
     templates: {
       modern: {
-        name: "モダンプロフェッショナル",
+        name: "モダン",
         description:
           "包括的な統計情報を含む、モダンでプロフェッショナルなプロフィール",
         preview: `<h1 align="center">👋 こんにちは、[name]です</h1>
 
-<p align="center">
+<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
   <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&color=success&style=flat" alt="Repositories" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
 </p>
 
 <h3 align="center">[bio]</h3>
 
 ### 🔭 自己紹介
 
-- 🏢 現在 **[company]** で働いています
-- 📍 **[location]** を拠点としています
-- 📊 **[repos]** 個のパブリックリポジトリを管理しています
-- 🌟 **[followers]** 人のデベロッパーにフォローされています
+{{company_ja}}
+{{location_ja}}
 
 ### 💻 技術スタック
 
@@ -246,9 +254,16 @@ const profile = {
 - 所在地: [location]`,
       },
       minimalist: {
-        name: "ミニマリストデベロッパー",
+        name: "シンプル",
         description: "クリーンで焦点を絞った作業の紹介",
         preview: `# [name]
+
+<p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repos&query=$.public_repos&style=flat" alt="Repositories" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=flat" alt="Followers" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=flat" alt="Following" />
+  <img src="https://komarev.com/ghpvc/?username=[username]&label=Views&color=0e75b6&style=flat" alt="Profile Views" />
+</p>
 
 > [bio]
 
@@ -256,11 +271,8 @@ const profile = {
 
 \`\`\`typescript
 const profile = {
-  拠点: '[location]',
-  所属: '[company]',
-  リポジトリ数: [repos],
-  フォロワー数: [followers],
-  フォロー数: [following],
+  {{location_typescript_ja}}
+  {{company_typescript_ja}}
   得意技術: [
     [languages]
   ]
@@ -269,8 +281,6 @@ const profile = {
 
 ## 活動
 
-- 📚 [repos]個のオープンソースプロジェクトを管理中
-- 👥 [followers]人のデベロッパーとつながっています
 - 💻 よく使用する言語: [languages]
 
 ---
@@ -284,10 +294,17 @@ const profile = {
 </details>`,
       },
       detailed: {
-        name: "総合ポートフォリオ",
+        name: "詳細",
         description: "GitHubプレゼンスの完全なショーケース",
         preview: `<div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?lines=[name]のプロフィールへようこそ!;[repos]個のパブリックリポジトリ;[followers]人のGitHubフォロワー&font=Fira%20Code&center=true&width=380&height=50">
+  <img src="https://readme-typing-svg.herokuapp.com/?lines=[name]のプロフィールへようこそ!;リポジトリをチェックしてください;GitHubでつながりましょう&font=Fira%20Code&center=true&width=380&height=50">
+  
+  <p align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;">
+    <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Repositories&query=$.public_repos&style=for-the-badge" alt="Repositories" />
+    <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Followers&query=$.followers&color=orange&style=for-the-badge" alt="Followers" />
+    <img src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/[username]&label=Following&query=$.following&color=blue&style=for-the-badge" alt="Following" />
+    <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile views" />
+  </p>
 </div>
 
 ## 👨‍💻 自己紹介
@@ -296,11 +313,8 @@ const profile = {
 
 ### 🌟 基本情報
 
-- 🏢 **[company]**で働いています
-- 📍 **[location]**に住んでいます
-- 📈 **[repos]**個のパブリックリポジトリ
-- 🤝 **[followers]**人のフォロワー
-- 👥 **[following]**人をフォロー中
+{{company_detailed_ja}}
+{{location_detailed_ja}}
 
 ### 💻 技術スペック
 
@@ -308,12 +322,7 @@ const profile = {
 {
   "主要言語": [
     [languages]
-  ],
-  "統計情報": {
-    "リポジトリ数": [repos],
-    "フォロワー数": [followers],
-    "フォロー数": [following]
-  }
+  ]
 }
 \`\`\`
 
@@ -334,11 +343,7 @@ const profile = {
 
 ![GitHub活動グラフ](https://github-readme-activity-graph.vercel.app/graph?username=[username]&theme=react-dark&locale=ja)
 
----
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=[username]&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" />
-</p>`,
+---`,
       },
     },
   },
