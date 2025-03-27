@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Github } from "lucide-react";
+import { GithubIcon } from "lucide-react";
 import { HomePage } from "./pages/HomePage";
 import { TemplateSelectionPage } from "./pages/TemplateSelectionPage";
 import { ProfilePreviewPage } from "./pages/ProfilePreviewPage";
@@ -19,7 +19,7 @@ function AppContent() {
         </div>
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <Github size={48} className="text-gray-800" />
+            <GithubIcon size={48} className="text-gray-800" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             {t.appTitle}
